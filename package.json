@@ -1,0 +1,18 @@
+{
+  "name": "api-supply-enegy",
+  "version": "1.0.0",
+  "description": "apliacion para suplir energia a contratos y wallets en la red de TRON",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon start index"
+  },
+  "author": "brutus.finance",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cron": "^3.1.6",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.0.1",
+    "tronweb": "^5.3.1"
+  }
+}
