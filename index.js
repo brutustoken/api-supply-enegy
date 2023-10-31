@@ -23,7 +23,7 @@ var inicio = new CronJob('0 */2 * * * *', async() => {
 	console.log('>Running :'+new Date().toLocaleString());
 	console.log('-----------------------------------');
 
-	watchWallet()
+	await watchWallet()
 	console.log('=>Done: '+new Date().toLocaleString());
 	
 });
@@ -50,7 +50,7 @@ async function watchWallet(){
                 "id_api": "1598897599",
                 "wallet": Wallet,
                 "amount": 200000,
-                "time": "1h",
+                "time": "1",
                 "user_id": "string"
             })
         })
