@@ -36,7 +36,7 @@ async function watchWallet(){
     var energia = recursos.EnergyLimit-recursos.EnergyUsed
     console.log(energia) // aleta a los 100K compra 200K por 1 dia
 
-    if(energia <= 100000){
+    if(energia <= 200000){
         console.log("alquilar energia")
 
         var result = await fetch("https://e-bot.brutusservices.com/main/energy",{
