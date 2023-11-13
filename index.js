@@ -44,7 +44,7 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
 
     }
 
-    console.log("monitoring "+resource+": "+(eval).toLocaleString("en-us")+" "+viewWallet)
+    console.log("monitoring "+resource+": "+(eval).toLocaleString("en-us")+" ("+(valorMonitoreo).toLocaleString("en-us")+")"+viewWallet)
 
     if(eval <= parseInt(valorMonitoreo) && true){
         
