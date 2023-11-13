@@ -21,7 +21,7 @@ var inicio = new CronJob('0 */1 * * * *', async() => {
 	console.log('>Running :'+new Date().toLocaleString());
 	console.log('-----------------------------------');
 
-	watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 200000, process.env.token_EBOT, "1598897599");
+	watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 150000, process.env.token_EBOT, "1598897599");
 	watchWallet("TW874JtRJDSwincEm64s2WbSQsMBUsiP1L", "band", 1000, "3d", 284, process.env.token_EBOT_2, "2129154100");
 
 	
