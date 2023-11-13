@@ -21,8 +21,15 @@ var inicio = new CronJob('0 */1 * * * *', async() => {
 	console.log('>Running :'+new Date().toLocaleString());
 	console.log('-----------------------------------');
 
-	watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 150000, process.env.token_EBOT, "1598897599");
-	watchWallet("TW874JtRJDSwincEm64s2WbSQsMBUsiP1L", "band", 1000, "3d", 284, process.env.token_EBOT_2, "2129154100");
+
+    //dapp monitoring
+	watchWallet("TCmWBMhbndmmqF61RYa9s3HvpFt7MrA7Wu", "band", 2000, "1d", 600, process.env.token_EBOT, process.env.token_EBOT_ID);
+
+    //ciroTRX.com
+	watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 150000, process.env.token_EBOT, process.env.token_EBOT_ID);
+	
+    //otros
+    watchWallet("TW874JtRJDSwincEm64s2WbSQsMBUsiP1L", "band", 1000, "3d", 284, process.env.token_EBOT_2, process.env.token_EBOT_2_ID);
 
 	
 });
@@ -40,7 +47,18 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
         }
         
     }else{
-        eval = (recursos.freeNetLimit+recursos.NetLimit)-(recursos.freeNetUsed+recursos.NetUsed)
+        //console.log(recursos)
+        eval = recursos.freeNetLimit
+        if(recursos.freeNetUsed){
+            eval = recursos.freeNetLimit-recursos.freeNetUsed
+        }
+        if(recursos.NetLimit){
+            eval = eval+recursos.NetLimit
+            if(recursos.NetUsed){
+                eval = eval-recursos.NetUsed
+            }
+        }
+        
 
     }
 
