@@ -39,6 +39,10 @@ inicio.start();
 async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, token, id){
     let recursos = await tronWeb.trx.getAccountResources(viewWallet)
 
+    if(time.split("d").length > 1){
+        time = time.split("d")[0]
+    }
+
     var eval = 0;
     if(resource === "energy"){
         eval = recursos.EnergyLimit
