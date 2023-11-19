@@ -29,7 +29,7 @@ var inicio = new CronJob('0 */1 * * * *', async() => {
 	watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 150000, process.env.token_EBOT, process.env.token_EBOT_ID);
 	
     //otros
-    watchWallet("TW874JtRJDSwincEm64s2WbSQsMBUsiP1L", "band", 1000, "3d", 284, process.env.token_EBOT_2, process.env.token_EBOT_2_ID);
+    //watchWallet("TW874JtRJDSwincEm64s2WbSQsMBUsiP1L", "band", 1000, "3d", 284, process.env.token_EBOT_2, process.env.token_EBOT_2_ID);
 
 	
 });
@@ -65,6 +65,9 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
         
 
     }
+
+    //Energy by freezing
+    //console.log(1/recursos.TotalEnergyWeight*recursos.TotalEnergyLimit)
 
     console.log("monitoring "+resource+": "+(eval).toLocaleString("en-us")+" ("+(valorMonitoreo).toLocaleString("en-us")+")"+viewWallet)
 
