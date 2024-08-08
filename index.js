@@ -29,7 +29,7 @@ var inicio = new CronJob('0 */1 * * * *', async () => {
     watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 150000, process.env.token_EBOT, process.env.token_EBOT_ID);
 
     //Brutus Lottery
-    watchWallet("THnbpHLGkx4eW7DxJ2cg7zAoMnQYZusoXJ", "energy", 500000, "1d", 300000, process.env.token_EBOT, process.env.token_EBOT_ID)
+    //watchWallet("THnbpHLGkx4eW7DxJ2cg7zAoMnQYZusoXJ", "energy", 500000, "1d", 300000, process.env.token_EBOT, process.env.token_EBOT_ID)
 
 
     //otros
