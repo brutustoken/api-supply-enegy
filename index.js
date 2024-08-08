@@ -49,17 +49,22 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
 
     var eval = 0;
     if (resource === "energy") {
-        eval = recursos.EnergyLimit
-        if (recursos.EnergyUsed) {
-            eval = recursos.EnergyLimit - recursos.EnergyUsed
+        if(recursos.EnergyLimit){
+            eval = recursos.EnergyLimit
+            if (recursos.EnergyUsed) {
+                eval = recursos.EnergyLimit - recursos.EnergyUsed
+            }
         }
+       
 
     } else {
         //console.log(recursos)
         eval = recursos.freeNetLimit
+
         if (recursos.freeNetUsed) {
             eval = recursos.freeNetLimit - recursos.freeNetUsed
         }
+
         if (recursos.NetLimit) {
             eval = eval + recursos.NetLimit
             if (recursos.NetUsed) {
