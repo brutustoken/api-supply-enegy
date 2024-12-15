@@ -22,11 +22,14 @@ var inicio = new CronJob('0 */1 * * * *', async () => {
     console.log('-----------------------------------');
 
 
+    //1d, 2d, 4, 5min
+
+
     //dapp monitoring
     watchWallet("TCmWBMhbndmmqF61RYa9s3HvpFt7MrA7Wu", "band", 2000, "1d", 600, process.env.token_EBOT, process.env.token_EBOT_ID);
 
     //ciroTRX.com
-    watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 150000, process.env.token_EBOT, process.env.token_EBOT_ID);
+    watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "5min", 200000, process.env.token_EBOT, process.env.token_EBOT_ID);
 
     //Brutus Lottery
     //watchWallet("THnbpHLGkx4eW7DxJ2cg7zAoMnQYZusoXJ", "energy", 500000, "1d", 300000, process.env.token_EBOT, process.env.token_EBOT_ID)
