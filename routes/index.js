@@ -2,7 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 require('dotenv').config()
-const token_EBOT_LIST = (process.env.token_EBOT_LIST.split(',')).map((s)=>{s= s.split(':'); return {token: s[0], id: s[1] }})
+const token_EBOT_LIST = (process.env.token_EBOT_LIST.split(','))
+.map((s)=>{
+  s= s.split(':'); 
+  return {token: s[0], id: s[1] }
+})
 
 const {TronWeb} = require('tronweb');
 const CronJob = require('cron').CronJob;
@@ -25,12 +29,10 @@ let inicio = new CronJob('0 */1 * * * *', async () => {
   watchWallet("TCmWBMhbndmmqF61RYa9s3HvpFt7MrA7Wu", "band", 2000, "1d", 600, token_EBOT_LIST[0].token, token_EBOT_LIST[0].id);
 
   //ciroTRX.com
-  watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "5min", 200000, token_EBOT_LIST[1].token, token_EBOT_LIST[1].id);
+  watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "5min", 200000, 'eZ9phlF2uoDwbip4mFoC', '294009064');
 
   //Brutus Lottery
   //watchWallet("THnbpHLGkx4eW7DxJ2cg7zAoMnQYZusoXJ", "energy", 500000, "1d", 300000, token_EBOT_LIST[0].token, token_EBOT_LIST[0].id);
-
-
 
   //console.log('>End: ' + new Date().toLocaleString());
   console.log('-----------------------------------');
@@ -77,7 +79,7 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
   //Energy by freezing
   //console.log(1/recursos.TotalEnergyWeight*recursos.TotalEnergyLimit)
 
-  console.log("#Monitoring -> " + resource + ": " + energyNeed + " (" + valorMonitoreo + ")" + viewWallet)
+  console.log("#Monitoring -> " + resource + ": " + energyNeed + " (" + valorMonitoreo + ") " + viewWallet)
 
   if (energyNeed <= parseInt(valorMonitoreo) && true) {
 
@@ -93,14 +95,14 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
               "wallet": viewWallet,
               "amount": amount,
               "time": time,
-              "user_id": "Supplyenergy:"+viewWallet
+              "user_id": "SE-" + Date.now()
           })
       })
 
       result = await result.json()
 
       if (result.response === 1) {
-          console.log("+" + amount + " " + resource + " para:" + viewWallet)
+          console.log("+" + amount + " " + resource + " para: " + viewWallet)
       } else {
         
           console.log("FALLO: " + amount + " " + resource + " para:" + viewWallet)
