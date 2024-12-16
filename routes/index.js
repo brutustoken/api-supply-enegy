@@ -29,7 +29,12 @@ let inicio = new CronJob('0 */1 * * * *', async () => {
   watchWallet("TCmWBMhbndmmqF61RYa9s3HvpFt7MrA7Wu", "band", 2000, "1d", 600, token_EBOT_LIST[0].token, token_EBOT_LIST[0].id);
 
   //ciroTRX.com
-  watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "5min", 200000, 'eZ9phlF2uoDwbip4mFoC', '294009064');
+  watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 200000, token_EBOT_LIST[1].token, token_EBOT_LIST[1].id)
+  .then((r)=>{
+    if(!r){
+      watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1h", 200000, token_EBOT_LIST[1].token, token_EBOT_LIST[1].id)
+    }
+  })
 
   //Brutus Lottery
   //watchWallet("THnbpHLGkx4eW7DxJ2cg7zAoMnQYZusoXJ", "energy", 500000, "1d", 300000, token_EBOT_LIST[0].token, token_EBOT_LIST[0].id);
@@ -42,6 +47,8 @@ let inicio = new CronJob('0 */1 * * * *', async () => {
 inicio.start();
 
 async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, token, id) {
+  let result = false;
+
   let recursos = await tronWeb.trx.getAccountResources(viewWallet)
 
   if (time.split("d").length > 1) {
@@ -69,7 +76,7 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
       if (recursos.NetLimit) {
           energyNeed =+ recursos.NetLimit
           if (recursos.NetUsed) {
-              energyNeed = energyNeed - recursos.NetUsed
+            energyNeed = energyNeed - recursos.NetUsed
           }
       }
 
@@ -83,7 +90,7 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
 
   if (energyNeed <= parseInt(valorMonitoreo) && true) {
 
-      var result = await fetch("https://e-bot.brutusservices.com/main/" + resource, {
+      let consulta = await fetch("https://e-bot.brutusservices.com/main/" + resource, {
 
           headers: {
               "token-api": token,
@@ -98,18 +105,21 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
               "user_id": "SE-" + Date.now()
           })
       })
+      .then((r)=>r.json())
+      .catch((e)=>{ console.log(e); return {response: 0} })
 
-      result = await result.json()
-
-      if (result.response === 1) {
-          console.log("+" + amount + " " + resource + " para: " + viewWallet)
+      if (consulta.response === 1) {
+        result = true
+        console.log("+" + amount + " " + resource + " para: " + viewWallet)
       } else {
-        
-          console.log("FALLO: " + amount + " " + resource + " para:" + viewWallet)
-          console.log("REASON: "+ result.msg)
+      
+        console.log("FALLO: " + amount + " " + resource + " para:" + viewWallet)
+        console.log("REASON: "+ consulta.msg)
       }
 
   }
+
+  return result
 
 }
 
