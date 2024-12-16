@@ -102,7 +102,9 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
       if (result.response === 1) {
           console.log("+" + amount + " " + resource + " para:" + viewWallet)
       } else {
+        
           console.log("FALLO: " + amount + " " + resource + " para:" + viewWallet)
+          console.log("REASON: "+ result.msg)
       }
 
   }
