@@ -31,7 +31,7 @@ let inicio = new CronJob('0 */1 * * * *', async () => {
   //ciroTRX.com
   watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1d", 200000, token_EBOT_LIST[1].token, token_EBOT_LIST[1].id)
   .then((r)=>{
-    if(!r){
+    if(r.error){
       watchWallet("TRrhyn55AtGEjgaLpj9sTbRGhqzVJ8ueNs", "energy", 200000, "1h", 200000, token_EBOT_LIST[1].token, token_EBOT_LIST[1].id)
     }
   })
@@ -47,7 +47,10 @@ let inicio = new CronJob('0 */1 * * * *', async () => {
 inicio.start();
 
 async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, token, id) {
-  let result = false;
+  let response = {
+    result: false,
+    error: null
+  };
 
   let recursos = await tronWeb.trx.getAccountResources(viewWallet)
 
@@ -109,17 +112,17 @@ async function watchWallet(viewWallet, resource, amount, time, valorMonitoreo, t
       .catch((e)=>{ console.log(e); return {response: 0} })
 
       if (consulta.response === 1) {
-        result = true
+        response.result = true
         console.log("+" + amount + " " + resource + " para: " + viewWallet)
       } else {
-      
+        response.error = true
         console.log("FALLO: " + amount + " " + resource + " para:" + viewWallet)
         console.log("REASON: "+ consulta.msg)
       }
 
   }
 
-  return result
+  return response
 
 }
 
